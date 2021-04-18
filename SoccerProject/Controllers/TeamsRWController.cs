@@ -77,7 +77,7 @@ namespace SoccerProject.Controllers
 
         }
         [HttpDelete]
-        [Route("api/teams/{id}")]
+        [Route("{id}")]
         public IHttpActionResult Delete(int id)
         {
             try
