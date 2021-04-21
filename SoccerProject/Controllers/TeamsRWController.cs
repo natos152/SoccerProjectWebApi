@@ -69,7 +69,7 @@ namespace SoccerProject.Controllers
                 DB.Put(id, team);
                 return Ok(res);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //BadRequest(ex.Message);
                 return Content(HttpStatusCode.NotFound, $"Team with id={id} was not found to update!");
@@ -85,7 +85,7 @@ namespace SoccerProject.Controllers
                     int res = DB.Delete(id);
                     return Ok("Success");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Content(HttpStatusCode.NotFound, $"Team with id={id} was not found to Delete!");
             }

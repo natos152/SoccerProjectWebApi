@@ -27,7 +27,7 @@ namespace SoccerProject.Models
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                t = new Team(Convert.ToInt16(reader["id_team"]), Convert.ToString(reader["club_name"]), Convert.ToInt16(reader["wins"]), Convert.ToInt16(reader["draws"]), Convert.ToInt16(reader["loses"]), Convert.ToInt16(reader["points"]));
+                t = new Team(Convert.ToInt16(reader["id_team"]), Convert.ToString(reader["club_name"]), Convert.ToString(reader["info"]), Convert.ToString(reader["img"]), Convert.ToInt16(reader["wins"]), Convert.ToInt16(reader["draws"]), Convert.ToInt16(reader["loses"]), Convert.ToInt16(reader["points"]));
                 teams.Add(t);
             }
             con.Close();
@@ -43,7 +43,7 @@ namespace SoccerProject.Models
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                t = new Team(Convert.ToInt16(reader["id_team"]), Convert.ToString(reader["club_name"]), Convert.ToInt16(reader["wins"]), Convert.ToInt16(reader["draws"]), Convert.ToInt16(reader["loses"]), Convert.ToInt16(reader["points"]));
+                t = new Team(Convert.ToInt16(reader["id_team"]), Convert.ToString(reader["club_name"]), Convert.ToString(reader["info"]), Convert.ToString(reader["img"]), Convert.ToInt16(reader["wins"]), Convert.ToInt16(reader["draws"]), Convert.ToInt16(reader["loses"]), Convert.ToInt16(reader["points"]));
             }
             return t;
         }
