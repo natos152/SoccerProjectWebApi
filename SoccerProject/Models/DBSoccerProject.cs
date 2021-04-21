@@ -33,6 +33,23 @@ namespace SoccerProject.Models
             con.Close();
             return teams;
         }
+        public List<Player> GetPlayers()
+        {
+            List<Player> players = new List<Player>();
+            Player p = null;
+            SqlConnection con = connection();
+            string query = "select * from dbo.Players";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                p = new Player(Convert.ToString(reader["team_name"]), Convert.ToString(reader["player_name"]), Convert.ToInt16(reader["age"]), Convert.ToInt16(reader["shirt_num"]));
+                players.Add(p);
+            }
+            con.Close();
+            return players;
+        }
+
 
         public Team GetTeam(int id_team)
         {
@@ -94,6 +111,8 @@ namespace SoccerProject.Models
             }
             return res;
         }
+
+
 
 
 
