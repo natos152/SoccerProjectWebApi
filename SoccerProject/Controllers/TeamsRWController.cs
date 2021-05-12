@@ -7,12 +7,13 @@ using System.Web.Http;
 
 namespace SoccerProject.Controllers
 {
-    [RoutePrefix("api/teams")]
+    //[RoutePrefix("api/teams")]
     public class TeamsRWController : ApiController
     {
          private static DBSoccerProject DB = new DBSoccerProject();
 
         //Get All
+        
         public IHttpActionResult Get()
         {
             try
@@ -46,7 +47,7 @@ namespace SoccerProject.Controllers
         }
 
         [HttpPost]
-        //[Route("api/teams")]
+        [Route("api/teamsRW/post")]
         public IHttpActionResult Post([FromBody] Team team)
         {
             try

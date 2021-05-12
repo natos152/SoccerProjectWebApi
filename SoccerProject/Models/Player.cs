@@ -19,6 +19,5 @@ namespace SoccerProject.Models
             Age = age;
             ShirtNum = shirtNum;
         }
-
     }
 }

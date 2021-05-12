@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace SoccerProject.Controllers
 {
-    [RoutePrefix("api/players")]
+    //[RoutePrefix("api/playersRW")]
     public class PlayersRWController : ApiController
     {
         private static DBSoccerProject DB = new DBSoccerProject();
@@ -23,6 +23,20 @@ namespace SoccerProject.Controllers
             catch (Exception ex)
             {
                 return Content(HttpStatusCode.BadRequest, ex);
+            }
+        }
+
+        [HttpPost]
+        [Route("api/playersRW/post")]
+        public IHttpActionResult Post([FromBody] Player player)
+        {
+            try
+            {
+                return Created(new Uri(Request.RequestUri.AbsoluteUri + player.PlayerName), DB.PostPlayer(player));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

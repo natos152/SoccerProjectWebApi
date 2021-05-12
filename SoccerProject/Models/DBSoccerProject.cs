@@ -33,22 +33,7 @@ namespace SoccerProject.Models
             con.Close();
             return teams;
         }
-        public List<Player> GetPlayers()
-        {
-            List<Player> players = new List<Player>();
-            Player p = null;
-            SqlConnection con = connection();
-            string query = "select * from dbo.Players";
-            SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                p = new Player(Convert.ToString(reader["team_name"]), Convert.ToString(reader["player_name"]), Convert.ToInt16(reader["age"]), Convert.ToInt16(reader["shirt_num"]));
-                players.Add(p);
-            }
-            con.Close();
-            return players;
-        }
+
 
 
         public Team GetTeam(int id_team)
@@ -68,7 +53,7 @@ namespace SoccerProject.Models
         public int Post(Team team)
         {
             SqlConnection con = connection();
-            string query = "INSERT INTO Teams (club_name,wins,draws,loses) " + "VALUES('" + team.ClubName + "'," + team.Win + "," + team.Draw + "," + team.Lose + ")";
+            string query = $"INSERT INTO Teams (club_name,info,img,wins,draws,loses) VALUES('{team.ClubName}','{team.Info}','{team.ImgClub}',{team.Win},{team.Draw},{team.Lose})";
             SqlCommand cmd = new SqlCommand(query, con);
             int res = cmd.ExecuteNonQuery();
             con.Close();
@@ -112,25 +97,6 @@ namespace SoccerProject.Models
             return res;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public List<User> GetUsers()
         {
             List<User> users = new List<User>();
@@ -160,6 +126,34 @@ namespace SoccerProject.Models
                 u = new User(Convert.ToInt16(reader["Id"]), Convert.ToString(reader["username"]), Convert.ToString(reader["password"]));
             }
             return u;
+        }
+
+        /*======PalyerDB Controller=======*/
+        public List<Player> GetPlayers()
+        {
+            List<Player> players = new List<Player>();
+            Player p = null;
+            SqlConnection con = connection();
+            string query = "select * from dbo.Players";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                p = new Player(Convert.ToString(reader["team_name"]), Convert.ToString(reader["player_name"]), Convert.ToInt16(reader["age"]), Convert.ToInt16(reader["shirt_num"]));
+                players.Add(p);
+            }
+            con.Close();
+            return players;
+        }
+
+        public int PostPlayer(Player player)
+        {
+            SqlConnection con = connection();
+            string query = "INSERT INTO Players (team_name,player_name,age,shirt_num) " + "VALUES('" + player.TeamName + "','" + player.PlayerName + "'," + player.Age + "," + player.ShirtNum + ")";
+            SqlCommand cmd = new SqlCommand(query, con);
+            int res = cmd.ExecuteNonQuery();
+            con.Close();
+            return res;
         }
     }
 }
